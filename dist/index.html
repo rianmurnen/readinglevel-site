@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Reading Level Correlation Chart</title>
+
+	<style>/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{-webkit-text-size-adjust:100%;line-height:1.15}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:none;}b,strong{font-weight:bolder}</style>
+	<style>/*! HTML5 Boilerplate v8.0.0 | MIT License | https://html5boilerplate.com/ */html{color:#222;font-size:1em;line-height:1.4}</style>
+	<style>
+		html {
+			--white: white;
+			--grey-lite: #F8F8F8;
+			--grey-medium: #6c6c67;
+			--black: black;
+			--brown: #734300;
+			--red: #B50000;
+			--orange: #FF8900;
+			--yellow: #FFE81C;
+			--green: #297500;
+			--blue-dark: #13115C;
+			--blue: #2A479C;
+			--blue-lite: #CAE8FE;
+			--purple: #560056;
+			--purple-dark: #39018C;
+			--silver: #c0c0c0;
+			--gold: #daa520;
+			--cream: #FEECDA;
+		}
+		body {
+			color: var(--black);
+			background-color: var(--white);
+			font-family: system-ui;
+			font-size: 100%;
+			margin: 0;
+			/* Layout Contents */
+			display: grid;
+			grid-template-columns: minmax(0.5rem, 1fr) minmax(min-content, 640px) minmax(0.5rem, 1fr);
+			grid-template-rows: minmax(1em, 1fr) repeat(auto) minmax(1em, 1fr);
+		}
+		body > * {
+			grid-column: 2 / -2;
+		}
+		table {
+			border: 0 none;
+			border-collapse: collapse;
+			color: var(--black);
+			width: 100%;
+		}
+		th, td {
+			background-color: #ededed;
+			border: 0.25em solid var(--white);
+			padding: 0.5em;
+		}
+		thead {
+			background-color: var(--white);
+			color: black;
+			position: sticky;
+			top: 0;
+		}
+		thead th {
+			background-color: var(--grey-lite);
+		}
+		thead th:first-of-type,
+		tbody th {
+			text-align: left;
+		}
+		tbody td {
+			text-align: center;
+		}
+
+		.yellow {
+			background-color: var(--yellow);
+			color: var(--purple);
+		}
+		.green {
+			background-color: var(--green);
+			color: var(--cream);
+		}
+		.blue {
+			background-color: var(--blue);
+			color: var(--grey-lite);
+		}
+		.red {
+			background-color: var(--red);
+			color: var(--grey-lite);
+		}
+		.white {
+			background-color: var(--white);
+			color: var(--black);
+		}
+		.black {
+			background-color: var(--black);
+			color: var(--white);
+		}
+		.orange {
+			background-color: var(--orange);
+			color: var(--blue-dark);
+		}
+		.purple {
+			background-color: var(--purple);
+			color: var(--yellow);
+		}
+		.brown {
+			background-color: var(--brown);
+			color: var(--blue-lite);
+		}
+		.silver {
+			background-color: var(--silver);
+			color: var(--purple-dark);
+		}
+		.gold {
+			background-color: var(--gold);
+			color: var(--purple-dark);
+		}
+
+		h1::before {
+			content: '';
+			display: inline-block;
+			inline-size: 0.75em;
+			block-size: 0.75em;
+			margin-inline-end: 0.5ch;
+			background-color: transparent;
+			background-image: url('favicon.svg');
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+		.dt-updated {
+			font-size: 0.75rem;
+			font-style: italic;
+			color: var(--grey-medium);
+		}
+
+		dt {
+			font-weight: bold;
+		}
+		dd + dt {
+			padding-block-start: 1em;
+		}
+		dd {
+			margin-inline-start: 0;
+		}
+
+		s {
+			text-decoration-color: var(--red);
+		}
+		s a {
+			color: inherit;
+			text-decoration: inherit;
+		}
+		.editor-note {
+			color: var(--red);
+		}
+
+		/* Visually Hidden and Accessible */
+		.sr-only{clip:rect(0,0,0,0);border:0;height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;white-space:nowrap;width:1px}
+	</style>
+	<style media="print">body{font-size:68%;grid-template-columns: 1fr;}body>*{grid-column: 1 / -1;padding-inline: 0;}header,aside,footer{display:none;}thead{display:table-header-group;}tr{break-inside:avoid;}</style>
+
+	<meta name="description" content="A chart of the approximate relationship between different reading level assessment systems.">
+
+	<meta property="og:title" content="Reading Level Correlation Chart">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="">
+	<meta property="og:image" content="screenshot-1200x628.webp">
+
+	<link rel="icon" href="favicon.ico" sizes="any"><!-- 32x32 -->
+	<link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any"><!-- Include prefers-color-scheme: dark in SVG -->
+	<link rel="apple-touch-icon" href="apple-touch-icon.png"><!-- 180x180 -->
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+	<link rel="manifest" href="site.webmanifest">
+	<meta name="theme-color"
+		content="#F8F8F8"
+		media="(prefers-color-scheme: light)">
+	<meta name="theme-color"
+		content="#070707"
+		media="(prefers-color-scheme: dark)">
+
+	<meta name="format-detection" content="telephone=no">
+</head>
+<body>
+<header role="banner">
+	<h1>Reading Level Correlation Chart</h1>
+	<p>A chart of the <strong>approximate</strong> relationship between different reading level assessment systems.</p>
+	<p class="dt-updated">Updated September 2022</p>
+</header>
+<main>
+	<table>
+		<thead>
+			<tr>
+				<th><span class="sr-only">Approximate Grade Level</span></th>
+				<th><abbr title="Independent Reading Level Assessment">IRLA</abbr></th>
+				<th><abbr title="Developmental Reading Assessment">DRA</abbr></th>
+				<th><abbr title="Guided Reading Level">GR</abbr>&nbsp;/&nbsp;<abbr title="Fountas-Pinnell Test Level Gradient">F&amp;P</abbr></th>
+				<th><abbr title="Lexile Framework for Reading">Lexile</abbr></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th data-system="grade" rowspan="6"><abbr title="Kindergarten">K</abbr></th>
+				<td class="yellow" data-system="irla"><abbr title="1 yellow">1Y</abbr></td>
+				<td data-system="dra">A</td>
+				<td data-system="gr" rowspan="2">A</td>
+				<td data-system="lexile" rowspan="6">BR40L - 230L</td>
+			</tr>
+			<tr>
+				<!-- <th data-system="grade"><abbr title="Kindergarten">K</abbr></th> -->
+				<td class="yellow" data-system="irla"><abbr title="2 yellow">2Y</abbr></td>
+				<td data-system="dra">1</td>
+				<!-- <td data-system="gr">A-B</td> -->
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<!-- <th data-system="grade"><abbr title="Kindergarten">K</abbr></th> -->
+				<td class="yellow" data-system="irla"><abbr title="3 yellow">3Y</abbr></td>
+				<td data-system="dra">2</td>
+				<td data-system="gr">B</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">&nbsp;</th> continued -->
+				<td class="green" data-system="irla"><abbr title="1 green">1G</abbr></td>
+				<td data-system="dra">3</td>
+				<td data-system="gr">C</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">&nbsp;</th> -->
+				<td class="green" data-system="irla" rowspan="2"><abbr title="2 green">2G</abbr></td>
+				<td data-system="dra">4</td>
+				<td data-system="gr">D</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr><tr>
+				<!-- <th data-system="grade">&nbsp;</th> -->
+				<!-- <td class="green" data-system="irla"><abbr title="2 green">2G</abbr></td> -->
+				<td data-system="dra">6</td>
+				<td data-system="gr">E</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<th data-system="grade" rowspan="6">1st</th>
+				<td class="blue" data-system="irla" rowspan="3"><abbr title="1 blue">1B</abbr></td>
+				<td data-system="dra">8</td>
+				<td data-system="gr">F</td>
+				<td data-system="lexile" rowspan="6">190L - 540L</td>
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">1st</th> continued -->
+				<!-- <td class="blue" data-system="irla"><abbr title="1 blue">1B</abbr></td> -->
+				<td data-system="dra">10</td>
+				<td data-system="gr">G</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">1st</th> continued -->
+				<!-- <td class="blue" data-system="irla"><abbr title="1 blue">1B</abbr></td> -->
+				<td data-system="dra">12</td>
+				<td data-system="gr">H</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">1st</th> continued -->
+				<td class="blue" data-system="irla" rowspan="3"><abbr title="2 blue">2B</abbr></td>
+				<td data-system="dra">14</td>
+				<td data-system="gr" rowspan="3">I</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">1st</th> continued -->
+				<!-- <td class="blue" data-system="irla"><abbr title="2 blue">2B</abbr></td> -->
+				<td data-system="dra">15</td>
+				<!-- <td data-system="gr">I</td> -->
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr><tr>
+				<!-- <th data-system="grade">1st</th> continued -->
+				<!-- <td class="blue" data-system="irla"><abbr title="2 blue">2B</abbr></td> -->
+				<td data-system="dra">16</td>
+				<!-- <td data-system="gr">I</td> -->
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<th data-system="grade" rowspan="4">2nd</th>
+				<td class="red" data-system="irla" rowspan="2"><abbr title="1 red">1R</abbr></td>
+				<td data-system="dra">18</td>
+				<td data-system="gr">J</td>
+				<td data-system="lexile" rowspan="4">420L - 650L</td>
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">2nd</th> -->
+				<!-- <td class="red" data-system="irla"><abbr title="1 red">1R</abbr></td> -->
+				<td data-system="dra">20</td>
+				<td data-system="gr">K</td>
+				<!-- <td data-system="lexile">420-820</td> -->
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">2nd</th> continued -->
+				<td class="red" data-system="irla" rowspan="2"><abbr title="2 red">2R</abbr></td>
+				<td data-system="dra">24</td>
+				<td data-system="gr">L</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">2nd</th> continued -->
+				<!-- <td class="red" data-system="irla"><abbr title="2 red">2R</abbr></td> -->
+				<td data-system="dra">28</td>
+				<td data-system="gr">M</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<th data-system="grade" rowspan="3">3rd</th>
+				<td class="white" data-system="irla" rowspan="3"><abbr title="white">WH</abbr></td>
+				<td data-system="dra">30</td>
+				<td data-system="gr">N</td>
+				<td data-system="lexile" rowspan="3">520L - 820L</td>
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">3rd</th> -->
+				<!-- <td class="white" data-system="irla"><abbr title="white">WH</abbr></td> -->
+				<td data-system="dra">34</td>
+				<td data-system="gr">O</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">3rd</th> -->
+				<!-- <td class="white" data-system="irla"><abbr title="white">WH</abbr></td> -->
+				<td data-system="dra">38</td>
+				<td data-system="gr">P</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<th data-system="grade" rowspan="2">4th</th>
+				<td class="black" data-system="irla" rowspan="2"><abbr title="black">BK</abbr></td>
+				<td data-system="dra" rowspan="2">40</td>
+				<td data-system="gr">Q</td>
+				<td data-system="lexile" rowspan="2">740L - 940L</td>
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">4th</th> -->
+				<!-- <td class="black" data-system="irla"><abbr title="black">BK</abbr></td> -->
+				<!-- <td data-system="dra">40</td> -->
+				<td data-system="gr">R</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<th data-system="grade" rowspan="2">5th</th>
+				<td class="orange" data-system="irla" rowspan="2"><abbr title="orange">OR</abbr></td>
+				<td data-system="dra" rowspan="2">50</td>
+				<td data-system="gr">S</td>
+				<td data-system="lexile" rowspan="2">830L - 1010L</td>
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">5th</th> -->
+				<!-- <td class="orange" data-system="irla"><abbr title="orange">OR</abbr></td> -->
+				<!-- <td data-system="dra">50</td> -->
+				<td data-system="gr">T</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<th data-system="grade" rowspan="2">6th</th>
+				<td class="purple" data-system="irla" rowspan="2"><abbr title="purple">PU</abbr></td>
+				<td data-system="dra" rowspan="2">60</td>
+				<td data-system="gr">U</td>
+				<td data-system="lexile" rowspan="2">925L - 1070L</td>
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">6th</th> -->
+				<!-- <td data-system="irla">&nbsp;</td> -->
+				<!-- <td data-system="dra">&nbsp;</td> -->
+				<td data-system="gr">V</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<th data-system="grade" rowspan="2">7th</th>
+				<td class="brown" data-system="irla" rowspan="2"><abbr title="1 brown">1BR</abbr></td>
+				<td data-system="dra" rowspan="2">70</td>
+				<td data-system="gr">W</td>
+				<td data-system="lexile" rowspan="2">970L - 1120L</td>
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">7th</th> -->
+				<!-- <td data-system="irla">&nbsp;</td> -->
+				<!-- <td data-system="dra">&nbsp;</td> -->
+				<td data-system="gr">X</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<th data-system="grade" rowspan="2">8th</th>
+				<td class="brown" data-system="irla" rowspan="2"><abbr title="2 brown">2BR</abbr></td>
+				<td data-system="dra" rowspan="2">80</td>
+				<td data-system="gr">Y</td>
+				<td data-system="lexile" rowspan="2">1010L - 1185L</td>
+			</tr>
+			<tr>
+				<!-- <th data-system="grade">8th</th> -->
+				<!-- <td data-system="irla">&nbsp;</td> -->
+				<!-- <td data-system="dra">&nbsp;</td> -->
+				<td data-system="gr">Z</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+			<tr>
+				<th data-system="grade">9th</th>
+				<td class="silver" data-system="irla" rowspan="2"><abbr title="silver">SI</abbr></td>
+				<td data-system="dra">&nbsp;</td>
+				<td data-system="gr">&nbsp;</td>
+				<td data-system="lexile">1050L - 1260L</td>
+			</tr><tr>
+				<th data-system="grade">10th</th>
+				<!-- <td data-system="irla">&nbsp;</td> -->
+				<td data-system="dra">&nbsp;</td>
+				<td data-system="gr">&nbsp;</td>
+				<td data-system="lexile">1080L - 1335L</td>
+			</tr>
+			<tr>
+				<th data-system="grade">11th</th>
+				<td class="gold" data-system="irla" rowspan="2"><abbr title="gold">GL</abbr></td>
+				<td data-system="dra">&nbsp;</td>
+				<td data-system="gr">&nbsp;</td>
+				<td data-system="lexile" rowspan="2">1185L - 1385L</td>
+			</tr>
+			<tr>
+				<th data-system="grade">12th</th>
+				<!-- <td data-system="irla">&nbsp;</td> -->
+				<td data-system="dra">&nbsp;</td>
+				<td data-system="gr">&nbsp;</td>
+				<!-- <td data-system="lexile">&nbsp;</td> -->
+			</tr>
+		</tbody>
+	</table>
+
+
+</main>
+<aside>
+	<h2 id="assessment-systems">Assessment Systems</h2>
+	<dl>
+		<dt><abbr>IRLA</abbr></dt>
+		<dd>Independent Reading Level Assessment (source: <a href="https://www.americanreadingathome.com/bookstore/extra/IRLA-CCSS-V9/" rel="external noopener">American Reading Company</a>)</dd>
+
+		<dt><abbr>DRA</abbr></dt>
+		<dd>Developmental Reading Assessment (source: <a href="https://www.pearson.com/en-us.html" rel="external noopener">Pearson</a>)</dd>
+
+		<dt>GR</dt>
+		<dd>Guided Reading Level (source: <a href="http://teacher.scholastic.com/products/guidedreading/leveling_chart.htm">Scholastic</a>)</dd>
+
+		<dt>F&amp;P</dt>
+		<dd>Fountas-Pinnell Test Level Gradient (source: <a href="https://www.fountasandpinnell.com/textlevelgradient/" rel="external noopener">Fountas-Pinnell</a>)</dd>
+
+		<dt>Lexile</dt>
+		<dd>Lexile Framework for Reading (source: <a href="https://lexile.com/parents-students/measuring-growth-lexile-measures/college-and-career-trajectory/" rel="external noopener">Lexile</a>)</dd>
+	</dl>
+
+	<h2 id="data-sources">Data Sources</h2>
+	<ul>
+		<li>Scholastic’s <a href="http://teacher.scholastic.com/products/guidedreading/leveling_chart.htm" rel="external noopener">Guided Reading Leveling Resource Chart</a></li>
+		<li>Washington State Library’s <a href="https://www.sos.wa.gov/_assets/library/libraries/firsttuesdays/readingchart.pdf" rel="external noopener">Reading Level Correlation Chart (PDF)</a></li>
+		<li><s>Springfield Illinois Public School District # 186 <a href="https://www.sps186.org/downloads/basic/534922/IRLA%20Conversion%20Chart%20.pdf" rel="external noopener">DRA - GR - IRLA - Lexile Correlation (PDF)</a>.</s> <span class="editor-note">Resource no longer available.</span></li>
+	</ul>
+
+</aside>
+<footer role="contentinfo">
+	<h2 id="about">About Site</h2>
+	<p>Parents and guardians are often told their student “is reading at…” or “has been assessed at…” a certain reading level. They are encouraged to help the student find books at their level to read at home. Then they dutifully go to the library or bookstore only to discover that there are several different reading level systems and that publishers usually only reference one system, if any. Librarians and library volunteers do their best to help, but may only be familiar with one or two systems.</p>
+	<p>This chart is an <em>attempt</em> to help families find books for their student across reading level assessment systems. The chart aggregates information published by various organizations such as publishers, school districts, libraries, and departments of education.</p>
+</footer>
+
+<script>
+if (navigator.serviceWorker) {
+	navigator.serviceWorker.register('/serviceworker.js');
+}
+</script>
+</body>
+</html>
