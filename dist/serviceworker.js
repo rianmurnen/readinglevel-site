@@ -8,13 +8,12 @@ function updateStaticCache() {
     .then( cache => {
         // These items won't block the installation of the Service Worker
         cache.addAll([
-						'/android-chrome-192x192.png',
-						'/android-chrome-512x512.png',
-						'/apple-touch-icon.png',
-						'/favicon.ico',
-						'/favicon.svg',
-						'/screenshot-1200x628.webp',
-						'/maskable-icon-1024x1024.png',
+						'/images/icons/android-chrome-192x192.png',
+						'/images/icons/android-chrome-512x512.png',
+						'/images/icons/apple-touch-icon.png',
+						'/images/icons/favicon.ico',
+						'/images/icons/favicon.svg',
+						'/images/screenshot-1200x628.webp',
             '/site.webmanifest'
         ]);
         // These items must be cached for the Service Worker to complete installation
