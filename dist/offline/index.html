@@ -1,1 +1,86 @@
-Oops! Something went wrong.
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Your Device is Offline — Reading Level Correlation Chart</title>
+	<style>/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{-webkit-text-size-adjust:100%;line-height:1.15}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:none;}b,strong{font-weight:bolder}</style>
+	<style>/*! HTML5 Boilerplate v8.0.0 | MIT License | https://html5boilerplate.com/ */html{color:#222;font-size:1em;line-height:1.4}</style>
+	<style>
+		html {
+			--white: white;
+			--grey-lite: #F8F8F8;
+			--grey-medium: #6c6c67;
+			--black: black;
+			--brown: #734300;
+			--red: #B50000;
+			--orange: #FF8900;
+			--yellow: #FFE81C;
+			--green: #297500;
+			--blue-dark: #13115C;
+			--blue: #2A479C;
+			--blue-lite: #CAE8FE;
+			--purple: #560056;
+			--purple-dark: #39018C;
+			--silver: #c0c0c0;
+			--gold: #daa520;
+			--cream: #FEECDA;
+		}
+		body {
+			color: var(--grey-medium);
+			background-color: var(--grey-lite);
+			font-family: system-ui;
+			font-size: 100%;
+			margin: 0;
+			/* Layout Contents */
+			display: grid;
+			grid-template-columns: minmax(0.5rem, 1fr) minmax(min-content, 640px) minmax(0.5rem, 1fr);
+			grid-template-rows: minmax(1em, 1fr) repeat(auto) minmax(1em, 1fr);
+		}
+		body > * {
+			grid-column: 2 / -2;
+		}
+
+		/* Visually Hidden and Accessible */
+		.sr-only{clip:rect(0,0,0,0);border:0;height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;white-space:nowrap;width:1px}
+	</style>
+	<style media="print">body{font-size:68%;grid-template-columns: 1fr;}body>*{grid-column: 1 / -1;padding-inline: 0;}header,aside,footer{display:none;}thead{display:table-header-group;}tr{break-inside:avoid;}</style>
+
+	<meta name="description" content="A chart of the approximate relationship between different reading level assessment systems.">
+
+	<meta property="og:title" content="Reading Level Correlation Chart">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://readinglevel.netlify.app/">
+	<meta property="og:image" content="https://readinglevel.netlify.app/screenshot-1200x628.webp">
+
+	<link rel="icon" href="/images/icons/favicon.ico" sizes="any"><!-- 32x32 -->
+	<link rel="icon" href="/images/icons/favicon.svg" type="image/svg+xml" sizes="any"><!-- Include prefers-color-scheme: dark in SVG -->
+
+	<link rel="manifest" href="/site.webmanifest">
+	<meta name="theme-color"
+		content="#F8F8F8"
+		media="(prefers-color-scheme: light)">
+	<meta name="theme-color"
+		content="#070707"
+		media="(prefers-color-scheme: dark)">
+
+	<meta name="format-detection" content="telephone=no">
+</head>
+<body>
+<header role="banner">
+	<h1>Your Device is Offline</h1>
+	<p>Sorry you have no connection at the moment.</p>
+</header>
+<main>
+</main>
+<footer role="contentinfo">
+</footer>
+
+<script>
+if (navigator.serviceWorker) {
+	navigator.serviceWorker.register('/serviceworker.js');
+}
+</script>
+</body>
+</html>
+
